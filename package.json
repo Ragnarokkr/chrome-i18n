@@ -21,7 +21,9 @@
       "url": "https://github.com/Ragnarokkr/chrome-i18n/blob/master/LICENSE-MIT"
     }
   ],
-  "main": "bin/chrome-i18n",
+  "bin": {
+    "chrome-i18n": "./bin/chrome-i18n.js"
+  },
   "engines": {
     "node": ">= 0.6"
   },
