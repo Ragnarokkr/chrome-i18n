@@ -1,7 +1,7 @@
 {
   "name": "chrome-i18n",
   "description": "Chrome Extension's locales database builder. One Place, More Languages.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/Ragnarokkr/chrome-i18n",
   "author": {
     "name": "Marco Trulla",
