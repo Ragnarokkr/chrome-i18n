@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "description": "Test Dictionary",
+    "author": "Marco Trulla <marco@marcotrulla.it> http://marcotrulla.it/",
+    "version": "0.1.0",
+    "locales": [ "it", "en" ]
+  },
+  "database": {
+    "term": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term1": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term2": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term3": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term4": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term5": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term6": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term7": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term8": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    },
+    "term9": {
+      "description": "Term to localize",
+      "locales": {
+        "it": "Localizzato in Italiano",
+        "en": "Localized in English"
+      },
+      "placeholders": {
+        "id": {
+          "content": "$1",
+          "example": "This is an example"
+        }
+      }
+    }
+  }
+}
