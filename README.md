@@ -43,7 +43,7 @@ chrome-i18n --file meta.json
 As you can see, the only useful parameter you can use is `--file`. When omitted,
 this parameter will be set by default to `./dictionary.json`.
 
-The only supported file format is JSON. Files not comforming to this format
+The only supported file format is JSON. Files not conforming to this format
 will be ignored.
 
 ### Defining a project
@@ -58,15 +58,15 @@ Currently are supported three different formats to define a project:
   See the file `doc/category.md` for further informations about the category mode.
 - **language**: in this mode the project is divided into a meta descriptor file
   which will describe the project's structure and the database definitions, and
-  as much files as the supported languages which will define only the translations.
+  as many files as the supported languages which will define only the translations.
   See the file `doc/language.md` for further informations about the language mode.
 
 ### Philosophy
 
-Currently, people are managing locales manually. Every language with its own
-directory and definition file, all pretty the same but the translated message.
-It's a lot of useless redundancy to manage by hand. This sucks, and the goal
-is to make it much easier.
+Currently, people manually manage locales project sources. Every language with
+its own directory and definition file, all pretty the similiar but the translated
+message. It's a lot of useless redundancy to manage by hand. This sucks and the
+goal is to make it much easier.
 
 Chrome-i18n is a specific tool which will build a complete database for your
 Chrome extensions and web apps starting from some project files, easier to

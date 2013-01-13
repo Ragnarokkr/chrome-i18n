@@ -70,7 +70,7 @@ For example, you could add some copyright informations:
 ```json
 {
   "name": "Just an example",
-  "author": "Me and myself"
+  "author": "Me and myself",
   "format": "category",
   "imports": "./db/",
   "dest": "./_locales/",
@@ -113,7 +113,7 @@ It allows to split translations grouping them by category in smaller and easier
 files to manage.
 
 As you can see, the fields used inside this file are the same used for the
-`database` descriptor in monolith mode. It's pratically a splitting of the
+`database` descriptor in monolith mode. It's substantially a splitting of the
 monolith file format. (Please, refer to the monolith mode for a description
 of these fields).
 
@@ -125,13 +125,13 @@ the resulting project will be (almost for sure) invalid in Chrome.
 
 Ok, I'm lazy I know it, so same example from monolith mode.
 
-Here we have to split the project, so we have a meta file named (for
+Here we need to split the project, so we have a meta file named (for
 example) `meta.json` with the following structure:
 
 ```json
 {
   "format": "category",
-  "imports": "./_*.json"
+  "imports": "./_*.json",
   "dest": "./_locales/",
   "locales": [ "it", "en" ]
 }

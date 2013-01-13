@@ -33,7 +33,6 @@ The file **must be in valid JSON format**. The following is the structure:
     "term1": {
       "description": "this is the term number 1"
      },
-    },
     "termNo": {
       "description": "this is the term number #",
       "placeholders": {
@@ -50,7 +49,7 @@ The file **must be in valid JSON format**. The following is the structure:
 In language mode, the `meta` descriptor is a single file, similiar to the `meta`
 descriptor we found in category mode. It requires only five fields to be defined:
 
-- `format`: this field is a *string* and **must** be set to `category`.
+- `format`: this field is a *string* and **must** be set to `language`.
 - `imports`: this field can **only** be a *string* and **must** be set to a
   path. No globs are allowed, so things like `./**/*.json` is not permitted.
   This field indicates where to find all the definition files from which retrieve
@@ -82,7 +81,7 @@ For example, you could add some copyright informations:
 ```json
 {
   "name": "Just an example",
-  "author": "Me and myself"
+  "author": "Me and myself",
   "format": "language",
   "imports": "./db/",
   "dest": "./_locales/",
@@ -110,7 +109,7 @@ The file **must be in valid JSON format**. The following is the structure:
 
 It allows to split translations grouping them by language in smaller and easier
 files to manage. Here the structure is kept separated from the pure translation.
-All the files *must* be named using the appropriated country-code with `.json`
+All the files **must** be named using the appropriated country-code with `.json`
 suffix and reside under the `imports` path (no subdirectories are allowed).
 
 As you can see, the fields used inside this file are reduced to a key that refers
@@ -121,13 +120,13 @@ into the specified language.
 
 This is a variant from the category example.
 
-Here we have to split the project, so we have a meta file named (for
+Here we need to split the project, so we have a meta file named (for
 example) `meta.json` with the following structure:
 
 ```json
 {
   "format": "language",
-  "imports": "./langdb/"
+  "imports": "./langdb/",
   "dest": "./_locales/",
   "locales": [ "it", "en" ],
   "definitions": {

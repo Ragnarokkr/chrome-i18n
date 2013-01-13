@@ -72,7 +72,7 @@ For example, in your `meta` you could add some copyright informations:
 {
   "meta": {
     "name": "Just an example",
-    "author": "Me and myself"
+    "author": "Me and myself",
     "format": "monolith",
     "dest": "./_locales/",
     "locales": [ "it", "en" ]
@@ -85,9 +85,9 @@ and this will be perfectly valid.
 
 ### DATABASE Descriptor
 
-The `database` descriptor is required only in this mode. It allows the developer
-to define the whole database of translated terms for all the languages supported
-by your application.
+The `database` descriptor is required only in this mode. It allows you to define
+the whole database of translated terms for all the languages supported by your
+application.
 
 As you can see, the fields used inside this descriptor are pretty the same you
 already use when write by hand every single localization file, with just something
