@@ -1,7 +1,7 @@
 {
   "name": "chrome-i18n",
-  "description": "Chrome Extension's locales database builder. One Place, More Languages.",
-  "version": "0.1.1",
+  "description": "Chrome extension's locales builder.",
+  "version": "1.0.0",
   "homepage": "https://github.com/Ragnarokkr/chrome-i18n",
   "author": {
     "name": "Marco Trulla",
@@ -22,27 +22,34 @@
     }
   ],
   "bin": {
-    "chrome-i18n": "./bin/chrome-i18n.js"
+    "chrome-i18n": "./bin/chrome-i18n-cli.js"
   },
   "engines": {
-    "node": ">= 0.6"
+    "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt test"
-  },
-  "dependencies": {
-    "lodash": "0.10.x",
-    "pretty-data": "0.40.x"
+    "test": "grunt nodeunit"
   },
   "devDependencies": {
-    "grunt": "~0.4.0a",
-    "grunt-contrib-clean": "~0.4.0a"
+    "grunt": "~0.4.0rc5",
+    "grunt-contrib-clean": "~0.4.0rc5",
+    "grunt-contrib-nodeunit": "~0.1.2rc5",
+    "grunt-contrib-jshint": "~0.1.1rc5",
+    "grunt-contrib-watch": "~0.2.0rc5",
+    "marked": "~0.2.7",
+    "semver": "~1.1.2"
   },
   "keywords": [
     "chrome",
     "extension",
+    "webapp",
     "locales",
     "messages",
     "dictionary"
-  ]
+  ],
+  "dependencies": {
+    "glob": "~3.1.14",
+    "argparse": "~0.1.10",
+    "mkdirp": "~0.3.4"
+  }
 }
