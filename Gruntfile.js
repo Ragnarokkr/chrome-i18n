@@ -1,3 +1,4 @@
+/*jshint node:true*/
 'use strict';
 
 module.exports = function(grunt) {
@@ -8,8 +9,11 @@ module.exports = function(grunt) {
 		clean: {
 			markdown: ['./md']
 		},
-		nodeunit: {
-			files: ['test/**/*_test.js'],
+		bump: {
+			options: {
+				part: 'patch'
+			},
+			files: [ 'package.json' ]
 		},
 		jshint: {
 			options: {
@@ -29,10 +33,27 @@ module.exports = function(grunt) {
 			},
 		},
 		markdown: {
-			options: {
-				dest: './md/'
+			info: {
+				options: {
+					gfm: true,
+					highlight: 'manual'
+				},
+				files: [ './*.md' ],
+				dest: './md/',
+				template: './doc/template.jst'
 			},
-			files: [ './*.md', './doc/*.md' ]
+			doc: {
+				options: {
+					gfm: true,
+					highlight: 'manual'
+				},
+				files: [ './doc/*.md' ],
+				dest: './md/',
+				template: './doc/template.jst'
+			}
+		},
+		nodeunit: {
+			files: ['test/**/*_test.js'],
 		},
 		watch: {
 			gruntfile: {
@@ -59,14 +80,11 @@ module.exports = function(grunt) {
 	});
 
 	// Grunt-Contrib Tasks
-	Object.keys(grunt.config('pkg').devDependencies).forEach(function(dep){
+	Object.keys( grunt.config('pkg').devDependencies ).forEach( function(dep){
 		if (/^grunt\-/i.test(dep)) {
 			grunt.loadNpmTasks( dep );
 		} // if
 	});
-
-	// Custom tasks
-	grunt.loadTasks( 'tasks' );
 
 	// Default task.
 	grunt.registerTask('default', ['jshint', 'nodeunit']);

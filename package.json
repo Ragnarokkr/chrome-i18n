@@ -1,55 +1,55 @@
 {
-	"name": "chrome-i18n",
-	"description": "Chrome extension's locales builder.",
-	"version": "1.0.0",
-	"homepage": "https://github.com/Ragnarokkr/chrome-i18n",
-	"author": {
-		"name": "Marco Trulla",
-		"email": "marco@marcotrulla.it",
-		"url": "http://marcotrulla.it"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/Ragnarokkr/chrome-i18n.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Ragnarokkr/chrome-i18n/issues"
-	},
-	"licenses": [
-		{
-			"type": "MIT",
-			"url": "https://github.com/Ragnarokkr/chrome-i18n/blob/master/LICENSE-MIT"
-		}
-	],
-	"bin": {
-		"chrome-i18n": "./bin/chrome-i18n-cli.js"
-	},
-	"engines": {
-		"node": ">= 0.8.0"
-	},
-	"scripts": {
-		"test": "grunt nodeunit"
-	},
-	"devDependencies": {
-		"grunt": "~0.4.0rc5",
-		"grunt-contrib-clean": "~0.4.0rc5",
-		"grunt-contrib-nodeunit": "~0.1.2rc5",
-		"grunt-contrib-jshint": "~0.1.1rc5",
-		"grunt-contrib-watch": "~0.2.0rc5",
-		"marked": "~0.2.7",
-		"semver": "~1.1.2"
-	},
-	"keywords": [
-		"chrome",
-		"extension",
-		"webapp",
-		"locales",
-		"messages",
-		"dictionary"
-	],
-	"dependencies": {
-		"glob": "~3.1.14",
-		"argparse": "~0.1.10",
-		"mkdirp": "~0.3.4"
-	}
+  "name": "chrome-i18n",
+  "description": "Chrome extension's locales builder.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/Ragnarokkr/chrome-i18n",
+  "author": {
+    "name": "Marco Trulla",
+    "email": "marco@marcotrulla.it",
+    "url": "http://marcotrulla.it"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Ragnarokkr/chrome-i18n.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ragnarokkr/chrome-i18n/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/Ragnarokkr/chrome-i18n/blob/master/LICENSE-MIT"
+    }
+  ],
+  "bin": {
+    "chrome-i18n": "./bin/chrome-i18n-cli.js"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt nodeunit"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.4.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-bumpx": "~0.1.2",
+    "grunt-markdown": "~0.2.0"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "webapp",
+    "locales",
+    "messages",
+    "dictionary"
+  ],
+  "dependencies": {
+    "glob": "~3.1.14",
+    "argparse": "~0.1.10",
+    "mkdirp": "~0.3.4"
+  }
 }

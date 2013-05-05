@@ -9,8 +9,8 @@
 var commons = require( '../lib/commons' );
 
 function parse( source ) {
-  commons.resolveRelatives( source.meta );
-  return source;
+	commons.resolveRelatives( source.meta );
+	return source;
 } // parse()
 
 // Exposes functions
