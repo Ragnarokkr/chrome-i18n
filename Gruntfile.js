@@ -1,53 +1,74 @@
-/*jshint node:true */
-module.exports = function(grunt) {
 'use strict';
+
+module.exports = function(grunt) {
 
 	// Project configuration.
 	grunt.initConfig({
-		pkg: '<json:package.json>',
+		pkg: grunt.file.readJSON('package.json'),
 		clean: {
-			test: ['test/results/**']
+			markdown: ['./md']
 		},
-		test: {
+		nodeunit: {
 			files: ['test/**/*_test.js'],
-			tasks: ['clean:test']
-		},
-		lint: {
-			files: ['Gruntfile.js', 'package.json', 'bin/**/*.js',
-							'lib/**/*.js', 'test/**/*_test.js']
-		},
-		watch: {
-			files: '<config:lint.files>',
-			tasks: ['default']
 		},
 		jshint: {
 			options: {
-				curly: true,
-				eqeqeq: true,
-				immed: true,
-				latedef: true,
-				newcap: true,
-				noarg: true,
-				sub: true,
-				undef: true,
-				boss: true,
-				eqnull: true,
-				node: true,
-				globalstrict: true
+				jshintrc: '.jshintrc'
 			},
-			globals: {
-				exports: true,
-				require: true,
-				process: true,
-				console: true
+			gruntfile: {
+				src: 'Gruntfile.js'
+			},
+			lib: {
+				src: ['lib/**/*.js']
+			},
+			bin: {
+				src: ['bin/**/*.js']
+			},
+			test: {
+				src: ['test/**/*.js']
+			},
+		},
+		markdown: {
+			options: {
+				dest: './md/'
+			},
+			files: [ './*.md', './doc/*.md' ]
+		},
+		watch: {
+			gruntfile: {
+				files: '<%= jshint.gruntfile.src %>',
+				tasks: ['jshint:gruntfile']
+			},
+			lib: {
+				files: '<%= jshint.lib.src %>',
+				tasks: ['jshint:lib', 'nodeunit']
+			},
+			bin: {
+				files: '<%= jshint.bin.src %>',
+				tasks: ['jshint:bin', 'nodeunit']
+			},
+			test: {
+				files: '<%= jshint.test.src %>',
+				tasks: ['jshint:test', 'nodeunit']
+			},
+			markdown: {
+				files: '<%= markdown.files %>',
+				tasks: ['clean:markdown', 'markdown']
 			}
-		}
+		},
 	});
 
-	// Tasks.
-	grunt.loadNpmTasks('grunt-contrib-clean');
+	// Grunt-Contrib Tasks
+	Object.keys(grunt.config('pkg').devDependencies).forEach(function(dep){
+		if (/^grunt\-/i.test(dep)) {
+			grunt.loadNpmTasks( dep );
+		} // if
+	});
+
+	// Custom tasks
+	grunt.loadTasks( 'tasks' );
 
 	// Default task.
-	grunt.registerTask('default', ['lint', 'test']);
+	grunt.registerTask('default', ['jshint', 'nodeunit']);
 
 };

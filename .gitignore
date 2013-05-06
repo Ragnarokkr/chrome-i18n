@@ -1,5 +1,8 @@
-### Node
+# SublimeText project files
+*.sublime-workspace
+*.sublime-project
 
+# Node.js
 lib-cov
 *.seed
 *.log
@@ -12,12 +15,7 @@ lib-cov
 pids
 logs
 results
-node_modules
 
 npm-debug.log
+node_modules
 
-
-### Sublime Text
-
-*.sublime-project
-*.sublime-workspace
