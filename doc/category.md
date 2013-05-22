@@ -44,57 +44,22 @@ In category mode, the `meta` descriptor is a single file, similiar to the `meta`
 descriptor we found in [monolith](monolith.md#meta-descriptor) mode, but 
 without the `meta` key. It requires only four fields to be defined:
 
-<table>
-<thead>
-    <tr>
-        <th>Field</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <td>format</td>
-        <td>`String`</td>
-        <td>it **must** be set to `category`</td>
-    </tr>
-    <tr>
-        <td>imports</td>
-        <td>`String | Array`</td>
-        <td>it **must** be set to at least one file or path. Globs are allowed.
-            This field indicates where to find all the database files from which
-            retrieve the informations.
-            <br><br>
-            This field is validated and expanded according to some assumptions:
-            <br><br>
-            <ol>
-                <li>if `format` is equal to `monolith`, then it will be ignored</li>
-                <li>if not a `String` or `Array`, it will be invalid</li>
-                <li>if a `String` and no trailing path separator, then it's a file</li>
-                <li>if the suffix is missing, **.json** is assumed</li>
-                <li>if a `String` with a trailing path separator, then it's a directory</li>
-                <li>if a directory and no pattern is specified, ***.json** is assumed</li>
-                <li>if an `Array`, all the previous assumptions are taken and iterated.</li>
-            </ol>
-        </td>
-    </tr>
-    <tr>
-        <td>dest</td>
-        <td>`String`</td>
-        <td>it **must** be set to the target directory where the project have 
-            to be built. The path **must** end with a trailing path separator 
-            or the field will be invalid.</td>
-    </tr>
-    <tr>
-        <td>locales</td>
-        <td>`Array`</td>
-        <td>supported country codes by your extension/application. They 
-            **must** be compliant to the [country codes][cc-list] supported by 
-            the Chrome Store</td>
-    </tr>
-</tbody>
-</table>
+Field | Type | Description
+---|:-:|---
+format|`String`|it **must** be set to `category`
+imports<small>*</small>|`String` or `Array`|it **must** be set to at least one file or path. Globs are allowed. This field indicates where to find all the database files from which retrieve the informations.
+dest|`String`|it **must** be set to the target directory where the project have to be built. The path **must** end with a trailing path separator or the field will be invalid.
+locales|`Array`|supported country codes by your extension/application. They **must** be compliant to the [country codes][cc-list] supported by the Chrome Store
 
+(*) This field is validated and expanded according to some assumptions:
+
+1. if `format` is equal to `monolith`, then it will be ignored
+2. if not a `String` or `Array`, it will be invalid
+3. if a `String` and no trailing path separator, then it's a file
+4. if the suffix is missing, **.json** is assumed
+5. if a `String` with a trailing path separator, then it's a directory
+6. if a directory and no pattern is specified, ***.json** is assumed
+7. if an `Array`, all the previous assumptions are taken and iterated.
 
 In this mode, no other fields are required. However, no restrictions are made to
 the amount of informations you can add to this descriptor. Important is that 

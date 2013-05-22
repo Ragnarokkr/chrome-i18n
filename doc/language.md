@@ -56,60 +56,20 @@ In language mode, the `meta` descriptor is a single file, similiar to the `meta`
 descriptor we found in [category](category.md#meta-descriptor-file) mode.
 It requires only five fields to be defined:
 
-<table>
-<thead>
-    <tr>
-        <th>Field</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <td>format</td>
-        <td>`String`</td>
-        <td>it **must** be set to `language`.</td>
-    </tr>
-    <tr>
-        <td>imports</td>
-        <td>`String`</td>
-        <td>it **must** be set to a path. No globs into the path are 
-            allowed. This field indicates where to look for all the definition 
-            files to be used to retrieve the required informations.
-            <br><br>
-            This field is validated and expanded according to some assumptions:
-            <br><br>
-            <ol>
-                <li>if `format` is equal to `monolith`, then it will be ignored</li>
-                <li>if not a `String`, it will be invalid</li>
-                <li>if a `String` and no trailing path separator, it's invalid</li>
-                <li>if a `String` with a trailing path separator, then it's a directory</li>
-            </ol>
-        </td>
-    </tr>
-    <tr>
-        <td>dest</td>
-        <td>`String`</td>
-        <td>it **must** be set to the target directory where the project have 
-            to be built. The path **must** end with a trailing path separator 
-            or the field will be invalid.</td>
-    </tr>
-    <tr>
-        <td>locales</td>
-        <td>`Array`</td>
-        <td>supported country codes by your extension/application. They 
-            **must** be compliant to the [country codes][cc-list] supported by 
-            the Chrome Store.</td>
-    </tr>
-    <tr>
-        <td>definitions</td>
-        <td>`Object`</td>
-        <td>this is pretty similiar to the one defined for the `database` field 
-            in [monolith](doc/monolith.md#database-descriptor) mode, with a big 
-            difference, there's not `locales` field defined in it.</td>
-    </tr>
-</tbody>
-</table>
+Field | Type | Description
+---|:-:|---
+format|`String`|it **must** be set to `language`.
+imports<small>*</small>|`String`|it **must** be set to a path. No globs into the path are allowed. This field indicates where to look for all the definition files to be used to retrieve the required informations.
+dest|`String`|it **must** be set to the target directory where the project have to be built. The path **must** end with a trailing path separator or the field will be invalid.
+locales|`Array`|supported country codes by your extension/application. They **must** be compliant to the [country codes][cc-list] supported by the Chrome Store.
+definitions|`Object`|this is pretty similiar to the one defined for the `database` field in [monolith](doc/monolith.md#database-descriptor) mode, with a big difference, there's not `locales` field defined in it.
+
+(*) This field is validated and expanded according to some assumptions:
+
+1. if `format` is equal to `monolith`, then it will be ignored
+2. if not a `String`, it will be invalid
+3. if a `String` and no trailing path separator, it's invalid
+4. if a `String` with a trailing path separator, then it's a directory
 
 In this mode, no other fields are required. However, there's no restrictions to
 the amount of informations you can add to this descriptor. Important is that the

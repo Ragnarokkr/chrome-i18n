@@ -1,9 +1,9 @@
 # chrome-i18n - Chrome/Chromium i18n database builder
 
-[![Dependency Status](https://gemnasium.com/Ragnarokkr/chrome-i18n.png)](https://gemnasium.com/Ragnarokkr/chrome-i18n)
+[![Dependency Status](https://gemnasium.com/Ragnarokkr/chrome-i18n.png)](https://gemnasium.com/Ragnarokkr/chrome-i18n) [![Flattr this tools](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=marcotrulla&url=https://github.com/Ragnarokkr/chrome-i18n&title=Chrome-i18n&description=Chrome/Chromium%20i18n%20database%20builder&language=en_GB&tags=chrome,chromium,cli,tools,programming,i18n&category=software)
 
 * [Introduction](#introduction)
-* [How to install](how-to-install)
+* [How to install](#how-to-install)
 * [Usage](#usage)
     * [Defining a project](#defining-a-project)
     * [Example](#example)
@@ -37,6 +37,10 @@ To show the help, just type
 ```bash
 $ chrome-i18n --help
 ```
+or
+```bash
+$ man chrome-i18n
+```
 
 To build a project
 
@@ -52,27 +56,12 @@ well-formed JSON files will be ignored.
 
 Currently are supported three different ways in defining a project:
 
-<table>
-    <tr>
-        <td>**monolith**</td>
-        <td>the project file is a unique JSON file. It contains both the `meta` 
-            and `database` descriptors. Further informations in
-            [`doc/monolith.md`][monolith].</td>
-    </tr>
-    <tr>
-        <td>**category**</td>
-        <td>the project is divided into a meta descriptor file describing the 
-            project structure, and one or more definition files. Further 
-            informations in [`doc/category.md`][category].</td>
-    </tr>
-    <tr>
-        <td>**language**</td>
-        <td>the project is divided into a meta descriptor file describing the 
-            project structure and database definitions, and as many files 
-            as the supported languages. Further informations in 
-            [`doc/language.md`][language].</td>
-    </tr>
-</table>
+Mode | Description
+---|---
+**monolith**|the project file is a unique JSON file. It contains both the `meta` and `database` descriptors. Further informations in [`doc/monolith.md`][monolith].
+**category**|the project is divided into a meta descriptor file describing the project structure, and one or more definition files. Further informations in [`doc/category.md`][category].
+**language**|the project is divided into a meta descriptor file describing the project structure and database definitions, and as many files as the supported languages. Further informations in [`doc/language.md`][language].
+
 
 ### Example
 

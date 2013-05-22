@@ -59,36 +59,11 @@ to be similiar to the following:
 
 In monolith mode, the `meta` descriptor requires only three fields:
 
-<table>
-<thead>
-    <tr>
-        <th>Field</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <td>format</td>
-        <td>`String`</td>
-        <td>it **must** be set to `monolith`</td>
-    </tr>
-    <tr>
-        <td>dest</td>
-        <td>`String`</td>
-        <td>the target directory for the **_locales** directory. The path 
-            **must** end with a trailing path separator or the field will be 
-            invalid</td>
-    </tr>
-    <tr>
-        <td>locales</td>
-        <td>`Array`</td>
-        <td>supported country codes by your extension/application. They 
-            **must** be compliant to the [country codes][cc-list] supported by 
-            the Chrome Store</td>
-    </tr>
-</tbody>
-</table>
+Field | Type | Description
+---|:-:|---
+format|`String`|it **must** be set to `monolith`
+dest|`String`|the target directory for the **_locales** directory. The path **must** end with a trailing path separator or the field will be invalid
+locales|`Array`|supported country codes by your extension/application. They **must** be compliant to the [country codes][cc-list] supported by the Chrome Store
 
 In this mode, no other fields are required. However, no restrictions are made 
 to the amount of informations you can add to this descriptor. Important is that
@@ -124,33 +99,11 @@ to be translated. As you can see, the fields used for each key are pretty the
 same used when you write by hand every single localization file, with something 
 more:
 
-<table>
-    <tr>
-        <th>Field</th>
-        <th>Type</th>
-        <th>Description</th>
-    </tr>
-    <tr>
-        <td>*description*</td>
-        <td>`String`</td>
-        <td>a description of the translated term. **Optional**</td>
-    </tr>
-    <tr>
-        <td>*placeholders*</td>
-        <td>`Object`</td>
-        <td>same as the one used in plain Chrome i18n locales. It defines which
-            placeholders are used inside the translated messages. **Optional**</td>
-    </tr>
-    <tr>
-        <td>locales</td>
-        <td>`Object`</td>
-        <td>it describes the translated messages for all your supported languages.
-            It **should** define a key for all the languages defined in 
-            [`locales`](#meta-descriptor) field. It's not mandatory, but for every 
-            missing key a warning message will be generated and an automatic 
-            placeholder will be added into the generated project.</td>
-    </tr>
-</table>
+Field | Type | Description
+---|:-:|---
+*description*|`String`|a description of the translated term. **Optional**
+*placeholders*|`Object`|same as the one used in plain Chrome i18n locales. It defines which placeholders are used inside the translated messages. **Optional**
+locales|`Object`|it describes the translated messages for all your supported languages. It **should** define a key for all the languages defined in [`locales`](#meta-descriptor) field. It's not mandatory, but for every missing key a warning message will be generated and an automatic placeholder will be added into the generated project.
 
 Please, note that no further integrity check is performed on the data, so you
 could **potentially** add every information you want in this descriptor, but
