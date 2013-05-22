@@ -1,8 +1,5 @@
-# SublimeText project files
 *.sublime-workspace
-*.sublime-project
 
-# Node.js
 lib-cov
 *.seed
 *.log
@@ -20,3 +17,4 @@ npm-debug.log
 node_modules
 
 md
+man/*.gz

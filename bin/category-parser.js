@@ -12,26 +12,24 @@ var fs = require( 'fs' ),
 function rebuildDatabase( meta, errBuf ){
 	var db = {};
 
-	meta.imports.forEach( function( imported ){
-		imported.forEach( function( partial ){
-			try {
-				var file = JSON.parse( fs.readFileSync( partial, 'utf8' ) );
-				Object.keys( file ).forEach( function( termKey ){
-					var term = file[ termKey ];
-					meta.locales.forEach( function( lang ){
-						if ( !term.locales.hasOwnProperty( lang ) ) {
-							term.locales[ lang ] = '!-- PLACEHOLDER ADDED BY CHROME-I18N --!';
-							errBuf.push( 'Warning (locales): "' + lang +
-								'" version for "' + termKey +
-								'" is not defined' );
-						} // if
-					});
-					db[ termKey ] = term;
+	meta.imports.forEach( function( partial ){
+		try {
+			var file = JSON.parse( fs.readFileSync( partial, 'utf8' ) );
+			Object.keys( file ).forEach( function( termKey ){
+				var term = file[ termKey ];
+				meta.locales.forEach( function( lang ){
+					if ( !term.locales.hasOwnProperty( lang ) ) {
+						term.locales[ lang ] = '!-- PLACEHOLDER ADDED BY CHROME-I18N --!';
+						errBuf.push( 'Warning (locales): "' + lang +
+							'" version for "' + termKey +
+							'" is not defined' );
+					} // if
 				});
-			} catch( e ) {
-				errBuf.push( 'Warning (imports): unable to load or parse "' + partial + '"' );
-			} // try..catch
-		});
+				db[ termKey ] = term;
+			});
+		} catch( e ) {
+			errBuf.push( 'Warning (imports): unable to load or parse "' + partial + '"' );
+		} // try..catch
 	});
 
 	return db;

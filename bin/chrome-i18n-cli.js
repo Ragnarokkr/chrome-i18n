@@ -47,19 +47,19 @@ argv.addArgument(
 
 function parseSource( errBuf ) {
 	var parsers = {
-				monolith: function(){
-					return require( './monolith-parser.js' );
-				},
-				category: function(){
-					return require( './category-parser.js' );
-				},
-				language: function(){
-					return require( './language-parser.js' );
-				}
+			monolith: function(){
+				return require( './monolith-parser.js' );
 			},
-			args = argv.parseArgs(),
-			file = path.resolve( path.extname( args.file ) ? args.file : args.file + '.json' ),
-			source;
+			category: function(){
+				return require( './category-parser.js' );
+			},
+			language: function(){
+				return require( './language-parser.js' );
+			}
+		},
+		args = argv.parseArgs(),
+		file = path.resolve( path.extname( args.file ) ? args.file : args.file + '.json' ),
+		source;
 
 	if ( fs.existsSync( file ) ) {
 		try {

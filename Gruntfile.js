@@ -10,7 +10,8 @@ module.exports = function(grunt) {
 		},
 		bump: {
 			options: {
-				part: 'patch'
+				part: 'patch',
+				hardTab: true
 			},
 			files: [ 'package.json' ]
 		},
@@ -72,7 +73,7 @@ module.exports = function(grunt) {
 				tasks: ['jshint:test', 'nodeunit']
 			},
 			markdown: {
-				files: '<%= markdown.files %>',
+				files: ['<%= markdown.info.files %>','<%= markdown.doc.files %>'],
 				tasks: ['clean:markdown', 'markdown']
 			}
 		},

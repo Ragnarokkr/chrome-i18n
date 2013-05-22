@@ -1,86 +1,178 @@
-# CHROME-I18N
+# chrome-i18n - Chrome/Chromium i18n database builder
 
-### Introduction
+[![Dependency Status](https://gemnasium.com/Ragnarokkr/chrome-i18n.png)](https://gemnasium.com/Ragnarokkr/chrome-i18n)
 
-Chrome-i18n is a tool (a builder) for your apps/extensions' locales. Chrome-i18n
-lets you easily build a complete database of locales starting from some project
-files.
+* [Introduction](#introduction)
+* [How to install](how-to-install)
+* [Usage](#usage)
+    * [Defining a project](#defining-a-project)
+    * [Example](#example)
+* [Philosophy](#philosophy)
+* [Contributiung](#contributing)
+* [Release History](#release-history)
+* [License](#license)
 
-For example, to build a database from a unique file (the `monolith` mode), you
-run:
 
-```shell
-chrome-i18n
+## Introduction
+
+**chrome-i18n** is a command line tool for your Chrome/Chromium apps and extensions.
+It aims to help you in easily build a complete database of locales starting from
+some project files.
+
+
+## How to install
+
+It's possible to install chrome-i18n using [Node][] and [npm][]. (Remember to
+execute the command as root when install globally.)
+
+```bash
+$ npm install -g chrome-i18n
 ```
 
-This will load by default the file named `dictionary.json` into the current
-directory, and build the classic `_locales` directory with all the locales
-defined inside the dictionary file.
 
-### Installing Chrome-i18n
+## Usage
 
-Chrome-i18n is installed using [Node](http://nodejs.org/) and [npm](http://npmjs.org/).
+To show the help, just type 
 
-```shell
-npm install chrome-i18n -g
+```bash
+$ chrome-i18n --help
 ```
 
-According to your configuration, you probably should type the command as root to
-install it globally.
+To build a project
 
-### Usage
-
-To show the help, just type `chrome-i18n --help`.
-
-To build a project:
-
-```shell
-chrome-i18n
-chrome-i18n --file dict.json
-chrome-i18n --file meta.json
+```bash
+$ chrome-i18n [-f|--file <your-dictionary-json>]
 ```
 
-As you can see, the only useful parameter you can use is `--file`. When omitted,
-this parameter will be set by default to `./dictionary.json`.
-
-The only supported file format is JSON. Files not conforming to this format
-will be ignored.
+If `--file` option is omitted, the default project file will be  set to
+**./dictionary.json**. The only supported file format is **JSON**. Not 
+well-formed JSON files will be ignored.
 
 ### Defining a project
 
-Currently are supported three different formats to define a project:
+Currently are supported three different ways in defining a project:
 
-- **monolith**: in this mode the project file is a unique JSON file in which are
-  defined both the `meta` descriptor and the whole `database`. See the file
-  `doc/monolith.md` for further informations about the monolith mode.
-- **category**: in this mode the project is divided into a meta descriptor file
-  which will describe the project's structure, and one or more definition files.
-  See the file `doc/category.md` for further informations about the category mode.
-- **language**: in this mode the project is divided into a meta descriptor file
-  which will describe the project's structure and the database definitions, and
-  as many files as the supported languages which will define only the translations.
-  See the file `doc/language.md` for further informations about the language mode.
+<table>
+    <tr>
+        <td>**monolith**</td>
+        <td>the project file is a unique JSON file. It contains both the `meta` 
+            and `database` descriptors. Further informations in
+            [`doc/monolith.md`][monolith].</td>
+    </tr>
+    <tr>
+        <td>**category**</td>
+        <td>the project is divided into a meta descriptor file describing the 
+            project structure, and one or more definition files. Further 
+            informations in [`doc/category.md`][category].</td>
+    </tr>
+    <tr>
+        <td>**language**</td>
+        <td>the project is divided into a meta descriptor file describing the 
+            project structure and database definitions, and as many files 
+            as the supported languages. Further informations in 
+            [`doc/language.md`][language].</td>
+    </tr>
+</table>
 
-### Philosophy
+### Example
 
-Currently, people manually manage locales project sources. Every language with
-its own directory and definition file, all pretty the similiar but the translated
-message. It's a lot of useless redundancy to manage by hand. This sucks and the
-goal is to make it much easier.
+In this example we want to build a database from an unique file (the `monolith` 
+mode). To achieve this, we create a project file:
 
-Chrome-i18n is a specific tool which will build a complete database for your
+```javascript
+{
+    "meta": {
+        "format": "monolith",
+        "dest": "./_locales/",
+        "locales": [ "it", "en" ]
+    },
+    "database": {
+        "helloWorld": {
+            "description": "a greetings message",
+            "locales": {
+                "it": "Salve Mondo!",
+                "en": "Hello World!"
+            }
+        }
+    }
+}
+```
+
+and save giving name **dictionary.json**, then run our CLI tool:
+
+```bash
+$ chrome-i18n
+```
+
+The program will looks for a file named **dictionary.json** into the current
+directory, and builds the classic **_locales** directory structure for all the
+languages defined in our project file.
+
+
+## Philosophy
+
+Internationalization files in Chrome/Chromium are JSON files composed by an 
+object with tenths or hundreds (sometimes thousands) keys which describe how
+a string has to be translated in a particular language.
+
+People usually code these gigantic files by hand, one for each language they want 
+to give support. Each language with its own directory and definition file. Same
+structure, same keys, same rules, but the translated message. 
+
+It's a lot of useless redundancy to manage by hand. This sucks and the goal is 
+to make it easier to manage.
+
+chrome-i18n is a specific tool which will build a complete database for your
 Chrome extensions and web apps starting from some project files, easier to
 maintain and manage.
 
-### Contributing
-In lieu of a formal styleguide, take care to maintain the existing coding
-style. Add unit tests for any new or changed functionality. Lint and test
-your code using [grunt](http://gruntjs.com/).
 
-### Release History
-See the CHANGELOG.md file distributed with the project.
+## Contributing
 
-### License
+Any contribution to improve the project and/or expand it is welcome.
+
+If you're interested in contributing to this project, take care to maintain the
+existing coding style.
+
+The project follows these standard, so please you do it too:
+
+* [SemVer][] for version numbers
+* [Vandamme][] for changelog formatting
+* [EditorConfig][] for cross-editor configuration
+
+To contribute:
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
+
+Add unit tests for any new or changed functionality. Lint and test
+your code using [grunt][].
+
+
+## Release History
+
+See the [CHANGELOG][] file distributed with the project.
+
+
+## License
+
 Copyright (c) 2012-2013 Marco Trulla - Licensed under the MIT license.
 
-See the LICENSE-MIT file distributed with the project.
+See the [LICENSE][] file distributed with the project.
+
+
+[Node]: http://nodejs.org/
+[npm]: http://npmjs.org/
+[grunt]: http://gruntjs.com/
+[SemVer]: http://semver.org/
+[Vandamme]: https://github.com/tech-angels/vandamme
+[EditorConfig]: http://editorconfig.org/
+
+[monolith]: doc/monolith.md
+[category]: doc/category.md
+[language]: doc/language.md
+[CHANGELOG]: CHANGELOG.md
+[LICENSE]: LICENSE-MIT

@@ -1,1 +1,10 @@
-/node_modules/
+./node_modules/
+./md/
+./test/
+./doc/
+
+.*
+Gruntfile.js
+./man/chrome-i18n.1
+
+chrome-i18n.sublime-*
