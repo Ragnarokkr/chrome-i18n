@@ -58,7 +58,7 @@ locales|`Array`|supported country codes by your extension/application. They **mu
 3. if a `String` and no trailing path separator, then it's a file
 4. if the suffix is missing, **.json** is assumed
 5. if a `String` with a trailing path separator, then it's a directory
-6. if a directory and no pattern is specified, ***.json** is assumed
+6. if a directory and no pattern is specified, <strong>*.json</strong> is assumed
 7. if an `Array`, all the previous assumptions are taken and iterated.
 
 In this mode, no other fields are required. However, no restrictions are made to
