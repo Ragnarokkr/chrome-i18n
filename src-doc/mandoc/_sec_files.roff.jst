@@ -1,0 +1,23 @@
+.SH FILES
+<%= grunt.util._(name).capitalize() %> supports three kind of project formats:
+.B monolith,
+.B language,
+and
+.B category.
+
+In
+.B monolith
+mode it's required only a single JSON file which defines both `meta` and
+`database` descriptors.
+
+In
+.B language
+and
+.B category
+modes, the required files are at least two. The meta descriptor file which
+configures the project, and a set of data files which describes the various
+translations, grouped by language or category.
+
+Please, refer to
+.B <%= homepage %>/tree/master/doc
+for further informations.

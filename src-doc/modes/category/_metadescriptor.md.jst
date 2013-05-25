@@ -1,0 +1,52 @@
+
+### Meta descriptor
+
+The file **must be** a valid and well-formed JSON format. The following is the 
+template structure:
+
+```json
+{
+    "format": "category",
+    "dest": "./_locales/",
+    "locales": [ "it", "en" ],
+    "imports": "./db/"
+}
+```
+
+In category mode, the `meta` descriptor is a single file, similiar to the `meta`
+descriptor we found in [monolith](monolith.md#meta-descriptor) mode, but 
+without the `meta` key. It requires only four fields to be defined:
+
+Field | Type | Description
+---|:-:|---
+<% print( common_meta_fields.replace( '{{mode}}', 'category' ) ); %>
+imports<small>*</small>|`String` or `Array`|it **must** be set to at least one file or path. Globs are allowed. This field indicates where to find all the database files from which retrieve the informations.
+
+(*) This field is validated and expanded according to some assumptions:
+
+1. if `format` is equal to `monolith`, then it will be ignored
+2. if not a `String` or `Array`, it will be invalid
+3. if a `String` and no trailing path separator, then it's a file
+4. if the suffix is missing, **.json** is assumed
+5. if a `String` with a trailing path separator, then it's a directory
+6. if a directory and no pattern is specified, <strong>*.json</strong> is assumed
+7. if an `Array`, all the previous assumptions are taken and iterated.
+
+In this mode, no other fields are required. However, no restrictions are made to
+the amount of informations you can add to this descriptor. Important is that 
+the informations you add don't go to conflict with the supported ones.
+
+For example, you could add some copyright informations:
+
+```json
+{
+    "name": "Just an example",
+    "author": "Me and myself",
+    "format": "category",
+    "imports": "./db/",
+    "dest": "./_locales/",
+    "locales": [ "it", "en" ]
+}
+```
+
+and this would be perfectly valid.

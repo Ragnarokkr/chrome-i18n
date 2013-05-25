@@ -1,0 +1,39 @@
+
+## File format
+
+This mode requires only a file to manage meta data and database of the terms.
+
+The file **must be** in a valid and well-formed JSON format. The structure has
+to be similiar to the following:
+
+```json
+{
+    "meta": {
+        "format": "monolith",
+        "dest": "./_locales/",
+        "locales": [ "it", "en" ]
+    },
+    "database": {
+        "term1": {
+            "description": "this is the term number 1",
+            "locales": {
+                "it": "questo è il termine numero 1",
+                "en": "this is the term number 1"
+            }
+        },
+        "termNo": {
+            "description": "this is the term number #",
+            "placeholders": {
+                "index": {
+                    "content": "$1",
+                    "example": "this is the term number 5"
+                }
+            },
+            "locales": {
+                "it": "questo è il termine numero $index$",
+                "en": "this is the term number $index$"
+            }
+        }
+    }
+}
+```

@@ -1,6 +1,7 @@
-# chrome-i18n - Chrome/Chromium i18n database builder
+# chrome-i18n [![Dependency Status](https://gemnasium.com/Ragnarokkr/chrome-i18n.png)](https://gemnasium.com/Ragnarokkr/chrome-i18n)  [![Flattr this software](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=marcotrulla&url=https://github.com/Ragnarokkr/chrome-i18n&title=Chrome-i18n&description=Chrome/chromium%20i18n%20database%20builder&language=en_GB&tags=chrome,chromium,extension,application,webapp,locales,messages,dictionary,i18n&category=software)
 
-[![Dependency Status](https://gemnasium.com/Ragnarokkr/chrome-i18n.png)](https://gemnasium.com/Ragnarokkr/chrome-i18n) [![Flattr this tools](https://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=marcotrulla&url=https://github.com/Ragnarokkr/chrome-i18n&title=Chrome-i18n&description=Chrome/Chromium%20i18n%20database%20builder&language=en_GB&tags=chrome,chromium,cli,tools,programming,i18n&category=software)
+> Chrome/Chromium i18n database builder
+
 
 * [Introduction](#introduction)
 * [How to install](#how-to-install)
@@ -8,8 +9,8 @@
     * [Defining a project](#defining-a-project)
     * [Example](#example)
 * [Philosophy](#philosophy)
-* [Contributiung](#contributing)
-* [Release History](#release-history)
+* [Contributing](#contributing)
+* [Release history](#release-history)
 * [License](#license)
 
 
@@ -22,7 +23,7 @@ some project files.
 
 ## How to install
 
-It's possible to install chrome-i18n using [Node][] and [npm][]. (Remember to
+It's possible to install chrome-i18n using [nodejs][] and [npm][]. (Remember to
 execute the command as root when install globally.)
 
 ```bash
@@ -52,9 +53,10 @@ If `--file` option is omitted, the default project file will be  set to
 **./dictionary.json**. The only supported file format is **JSON**. Not 
 well-formed JSON files will be ignored.
 
+
 ### Defining a project
 
-Currently are supported three different ways in defining a project:
+Currently are supported three different modes in defining a project:
 
 Mode | Description
 ---|---
@@ -148,12 +150,13 @@ See the [CHANGELOG][] file distributed with the project.
 
 ## License
 
-Copyright (c) 2012-2013 Marco Trulla - Licensed under the MIT license.
+Copyright (c) 2012-2013 Marco Trulla.<br>
+Released under the MIT license.
 
 See the [LICENSE][] file distributed with the project.
 
 
-[Node]: http://nodejs.org/
+[nodejs]: http://nodejs.org/
 [npm]: http://npmjs.org/
 [grunt]: http://gruntjs.com/
 [SemVer]: http://semver.org/
@@ -165,3 +168,4 @@ See the [LICENSE][] file distributed with the project.
 [language]: doc/language.md
 [CHANGELOG]: CHANGELOG.md
 [LICENSE]: LICENSE-MIT
+

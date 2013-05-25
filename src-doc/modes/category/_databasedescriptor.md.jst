@@ -1,0 +1,42 @@
+
+### Database descriptor
+
+The file **must be** a valid and well-formed JSON format. The following is the 
+template structure:
+
+```json
+{
+    "term1": {
+        "description": "this is the term number 1",
+        "locales": {
+            "it": "questo è il termine numero 1",
+            "en": "this is the term number 1"
+        }
+    },
+    "termNo": {
+        "description": "this is the term number #",
+        "placeholders": {
+            "index": {
+                "content": "$1",
+                "example": "this is the term number 5"
+            }
+        },
+        "locales": {
+            "it": "questo è il termine numero $index$",
+            "en": "this is the term number $index$"
+        }
+    }
+}
+```
+
+It allows to split translations, grouping them by category in smaller files 
+easier to be managed.
+
+The fields inside this file are the same used for the `database` descriptor in 
+[monolith](monolith.md#database-descriptor) mode. It's substantially a 
+splitting of the monolith file format. (Please, refer to the monolith mode for 
+a description of these fields).
+
+Please note that no other integrity check is performed on the data, so you
+could **potentially** add every information you want in this descriptor, but
+the resulting project will be (almost for sure) invalid in Chrome.

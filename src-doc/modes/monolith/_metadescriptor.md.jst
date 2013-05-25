@@ -1,0 +1,31 @@
+
+### Meta Descriptor
+
+In monolith mode, the `meta` descriptor requires only three fields:
+
+Field | Type | Description
+---|:-:|---
+<% print( common_meta_fields.replace( '{{mode}}', 'monolith' ) ); %>
+
+In this mode, no other fields are required. However, no restrictions are made 
+to the amount of informations you can add to this descriptor. Important is that
+the informations you add don't generate conflicts with the supported ones.
+
+For example, in your `meta` you could add some copyright informations:
+
+```json
+{
+    "meta": {
+        "name": "Just an example",
+        "author": "Me and myself",
+        "format": "monolith",
+        "dest": "./_locales/",
+        "locales": [ "it", "en" ]
+    },
+    .
+    .
+    .
+}
+```
+
+and this would be perfectly valid.

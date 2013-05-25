@@ -2,9 +2,9 @@
 ./md/
 ./test/
 ./doc/
+./src-doc/
 
 .*
 Gruntfile.js
-./man/chrome-i18n.1
 
 chrome-i18n.sublime-*

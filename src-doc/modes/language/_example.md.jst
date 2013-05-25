@@ -1,0 +1,102 @@
+
+## Example
+
+This is the category example adapted for this mode.
+
+Here we need to split the project, so we have a meta file named (for
+example) **meta.json** with the following structure:
+
+```json
+{
+    "format": "language",
+    "imports": "./langdb/",
+    "dest": "./_locales/",
+    "locales": [ "it", "en" ],
+    "definitions": {
+        "appTitle": {
+            "description": "the app title"
+        },
+        "appDescription": {
+            "description": "the description for the app store",
+            "placeholders": {
+                "index": {
+                    "content": "$1",
+                    "example": "This is the app number 4 developed by me"
+                }
+            }
+        },
+        "menuTitle": {
+            "description": "the menu title"
+        },
+        "menuItem1": {
+            "description": "the first menu item"
+        },
+        "menuItem2": {
+            "description": "the second menu item"
+        }
+    }
+}
+```
+
+and two definition files named respectively **it.json** and
+**en.json**, under the **langdb/** directory.
+
+The **it.json** file:
+
+```json
+{
+    "appTitle": "La mia prima app tradotta",
+    "appDescription": "Questa è la app numero $index$ sviluppata da me",
+    "menuTitle": "Menu Principale",
+    "menuItem1": "Voce di menu 1",
+    "menuItem2": "Voce di menu 2"
+}
+```
+
+The **en.json** file:
+
+```json
+{
+    "appTitle": "My First Translated App",
+    "appDescription": "This is the app number $index$ developed by me",
+    "menuTitle": "Main Menu",
+    "menuItem1": "Menu Item 1",
+    "menuItem2": "Menu Item 2"
+}
+```
+
+and a starting directory structure like that:
+
+```
+Current Directory
+├── langdb
+│   ├── en.json
+│   └── it.json
+└── meta.json
+```
+
+then, to build the project, we have to type one of these two forms:
+
+```bash
+$ <%= name %> -f meta.json
+$ <%= name %> --file meta.json
+```
+
+and once hit the enter key and waited for a while, we should have something like
+that:
+
+```
+Current Directory
+├── langdb
+│   ├── en.json
+│   └── it.json
+├── _locales
+│   ├── en
+│   │   └── messages.json
+│   └── it
+│       └── messages.json
+└── meta.json
+```
+
+If something goes wrong, when the command exits, a list of warnings and errors is
+printed on the error console.

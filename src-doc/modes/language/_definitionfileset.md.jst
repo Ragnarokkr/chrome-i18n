@@ -1,0 +1,24 @@
+
+### Definitions file set
+
+The file **must be** a valid and well-formed JSON format. The following is the 
+template structure:
+
+```json
+{
+    "term1": "this is the term number 1",
+    "termNo": "this is the term number $index$",
+    .
+    .
+    .
+}
+```
+
+It allows to split translations grouping them by language in smaller files easier
+to manage. Here the structure is separated from the pure translation. All the 
+files **must be** named using the appropriated country-code followed by **.json**
+suffix and reside under the `imports` path (no subdirectories are allowed).
+
+The keys defined in this JSON object simply refers to the keys defined into the 
+meta descriptor file, and their values are the translation into the specified 
+language.

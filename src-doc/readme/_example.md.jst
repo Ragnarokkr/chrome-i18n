@@ -1,0 +1,34 @@
+
+### Example
+
+In this example we want to build a database from an unique file (the `monolith` 
+mode). To achieve this, we create a project file:
+
+```javascript
+{
+    "meta": {
+        "format": "monolith",
+        "dest": "./_locales/",
+        "locales": [ "it", "en" ]
+    },
+    "database": {
+        "helloWorld": {
+            "description": "a greetings message",
+            "locales": {
+                "it": "Salve Mondo!",
+                "en": "Hello World!"
+            }
+        }
+    }
+}
+```
+
+and save giving name **dictionary.json**, then run our CLI tool:
+
+```bash
+$ <%= name %>
+```
+
+The program will looks for a file named **dictionary.json** into the current
+directory, and builds the classic **_locales** directory structure for all the
+languages defined in our project file.

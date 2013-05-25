@@ -1,0 +1,68 @@
+
+## Example
+
+For this example we assume a file **dictionary.json** with the following structure:
+
+```json
+{
+    "meta": {
+        "format": "monolith",
+        "dest": "./_locales/",
+        "locales": [ "it", "en" ]
+    },
+    "database": {
+        "appTitle": {
+            "description": "the app title",
+            "locales": {
+                "it": "La mia prima app tradotta",
+                "en": "My First Translated App"
+            }
+        },
+        "appDescription": {
+            "description": "the description for the app store",
+            "placeholders": {
+                "index": {
+                    "content": "$1",
+                    "example": "This is the app number 4 developed by me"
+                }
+            },
+            "locales": {
+                "it": "Questa è la app numero $index$ sviluppata da me",
+                "en": "This is the app number $index$ developed by me"
+            }
+        }
+    }
+}
+```
+
+and a starting directory structure like that:
+
+```
+Current Directory/
+└── dictionary.json
+```
+
+then, to build the project, we have to execute the program using one of these 
+three forms:
+
+```bash
+$ <%= name %>
+$ <%= name %> -f dictionary.json
+$ <%= name %> --file dictionary.json
+```
+
+and once hit the enter key and waited for a while, we should have something like
+that:
+
+```
+Current Directory
+├── dictionary.json
+└── _locales
+    ├── en
+    │   └── messages.json
+    └── it
+        └── messages.json
+```
+
+If something goes wrong, when the command exits a list of warnings and errors is
+printed on the error console.

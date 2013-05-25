@@ -1,0 +1,21 @@
+
+### Database Descriptor
+
+The `database` descriptor is required only in this mode. It allows you to define
+the whole database of translated terms for all the languages supported by your
+application.
+
+This descriptor is a JSON object whose keys are the identifiers for the strings
+to be translated. As you can see, the fields used for each key are pretty the 
+same used when you write by hand every single localization file, with something 
+more:
+
+Field | Type | Description
+---|:-:|---
+*description*|`String`|a description of the translated term. **Optional**
+*placeholders*|`Object`|same as the one used in plain Chrome i18n locales. It defines which placeholders are used inside the translated messages. **Optional**
+locales|`Object`|it describes the translated messages for all your supported languages. It **should** define a key for all the languages defined in [`locales`](#meta-descriptor) field. It's not mandatory, but for every missing key a warning message will be generated and an automatic placeholder will be added into the generated project.
+
+Please, note that no further integrity check is performed on the data, so you
+could **potentially** add every information you want in this descriptor, but
+the resulting project will be (almost for sure) invalid in Chrome.

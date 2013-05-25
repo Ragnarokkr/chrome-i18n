@@ -1,0 +1,12 @@
+
+## File format
+
+This mode requires that the project is splitted in more than one component:
+
+- a **meta descriptor**: this file replicates all the fields used in `meta`
+  descriptor for the monolith mode and describes which files will go to compose
+  the final project
+- a **database**: this is not a single file (even if it could be) but rather a 
+  set of small files which will be included into the final project. In this mode, 
+  each database file **must** replicate the database structure used for the 
+  `database` field in monolith mode.

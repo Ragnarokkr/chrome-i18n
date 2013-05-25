@@ -1,16 +1,16 @@
 {
 	"name": "chrome-i18n",
-	"description": "Chrome extension's locales builder.",
+	"description": "Chrome/Chromium i18n database builder",
 	"version": "1.0.2",
 	"homepage": "https://github.com/Ragnarokkr/chrome-i18n",
 	"author": {
 		"name": "Marco Trulla",
 		"email": "marco@marcotrulla.it",
-		"url": "http://marcotrulla.it"
+		"url": "http://marcotrulla.it/"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Ragnarokkr/chrome-i18n.git"
+		"url": "git://github.com/Ragnarokkr/chrome-i18n.git"
 	},
 	"bugs": {
 		"url": "https://github.com/Ragnarokkr/chrome-i18n/issues"

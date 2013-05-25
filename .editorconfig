@@ -8,12 +8,21 @@ indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.md]
+[*.md*]
 indent_style = space
 trim_trailing_whitespace = false
+insert_final_newline = false
+
+[*.roff*]
+indent_style = space
+trim_trailing_whitespace = false
+insert_final_newline = false
 
 [*.js]
 indent_style = tab
 
 [*.json]
 indent_style = tab
+
+[*.jst]
+indent_style = space

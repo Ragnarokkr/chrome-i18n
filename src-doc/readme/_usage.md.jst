@@ -1,0 +1,22 @@
+
+## Usage
+
+To show the help, just type 
+
+```bash
+$ <%= name %> --help
+```
+or
+```bash
+$ man <%= name %>
+```
+
+To build a project
+
+```bash
+$ <%= name %> [-f|--file <your-dictionary-json>]
+```
+
+If `--file` option is omitted, the default project file will be  set to
+**./dictionary.json**. The only supported file format is **JSON**. Not 
+well-formed JSON files will be ignored.

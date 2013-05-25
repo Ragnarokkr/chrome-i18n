@@ -1,0 +1,68 @@
+
+### Meta descriptor
+
+This file **must be** in a valid and well-formed JSON format. The following is 
+the template structure:
+
+```json
+{
+    "format": "language",
+    "imports": "./db/",
+    "dest": "./_locales/",
+    "locales": [ "it", "en" ],
+    "definitions": {
+        "term1": {
+            "description": "this is the term number 1"
+        },
+        "termNo": {
+            "description": "this is the term number #",
+            "placeholders": {
+                "index": {
+                    "content": "$1",
+                    "example": "this is the term number 5"
+                }
+            }
+        }
+    }
+}
+```
+
+In language mode, the `meta` descriptor is a single file, similiar to the `meta`
+descriptor we found in [category](category.md#meta-descriptor-file) mode.
+It requires only five fields to be defined:
+
+Field | Type | Description
+---|:-:|---
+<% print( common_meta_fields.replace( '{{mode}}', 'language' ) ); %>
+imports<small>*</small>|`String`|it **must** be set to a path. No globs into the path are allowed. This field indicates where to look for all the definition files to be used to retrieve the required informations.
+definitions|`Object`|this is pretty similiar to the one defined for the `database` field in [monolith](doc/monolith.md#database-descriptor) mode, with a big difference, there's not `locales` field defined in it.
+
+(*) This field is validated and expanded according to some assumptions:
+
+1. if `format` is equal to `monolith`, then it will be ignored
+2. if not a `String`, it will be invalid
+3. if a `String` and no trailing path separator, it's invalid
+4. if a `String` with a trailing path separator, then it's a directory
+
+In this mode, no other fields are required. However, there's no restrictions to
+the amount of informations you can add to this descriptor. Important is that the
+informations you add don't go to conflict with the supported ones.
+
+For example, you could add some copyright informations:
+
+```json
+{
+    "name": "Just an example",
+    "author": "Me and myself",
+    "format": "language",
+    "imports": "./db/",
+    "dest": "./_locales/",
+    "locales": [ "it", "en" ],
+    "definitions": {
+        "term1": { ... },
+        "term2": { ... }
+    }
+}
+```
+
+and this would be perfectly valid.

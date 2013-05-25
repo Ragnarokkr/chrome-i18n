@@ -1,0 +1,108 @@
+
+## Example
+
+Ok, I'm lazy I know it, so same example as in monolith mode.
+
+Here we need to split the project, so we have a meta file named (for
+example) **meta.json** with the following structure:
+
+```json
+{
+    "format": "category",
+    "imports": "./_*.json",
+    "dest": "./_locales/",
+    "locales": [ "it", "en" ]
+}
+```
+
+and (ok I'm not so lazy) two database files named respectively **_core.json** and
+**_menu.json**.
+
+The **_core.json** file:
+
+```json
+{
+    "appTitle": {
+        "description": "the app title",
+        "locales": {
+            "it": "La mia prima app tradotta",
+            "en": "My First Translated App"
+        }
+    },
+    "appDescription": {
+        "description": "the description for the app store",
+        "placeholders": {
+            "index": {
+                "content": "$1",
+                "example": "This is the app number 4 developed by me"
+            }
+        },
+        "locales": {
+            "it": "Questa è la app numero $index$ sviluppata da me",
+            "en": "This is the app number $index$ developed by me"
+        }
+    }
+}
+```
+
+and the **_menu.json** file:
+
+```json
+{
+    "menuTitle": {
+        "description": "the menu title",
+        "locales": {
+            "it": "Menu Principale",
+            "en": "Main Menu"
+        }
+    },
+    "menuItem1": {
+        "description": "the first menu item",
+        "locales": {
+            "it": "Voce di menu 1",
+            "en": "Menu Item 1"
+        }
+    },
+    "menuItem2": {
+        "description": "the second menu item",
+        "locales": {
+            "it": "Voce di menu 2",
+            "en": "Menu Item 2"
+        }
+    }
+}
+```
+
+and a starting directory structure like that:
+
+```
+Current Directory
+├── _core.json
+├── _menu.json
+└── meta.json
+```
+
+then, to build the project, we have to type one of the following two forms:
+
+```bash
+$ <%= name %> -f meta.json
+$ <%= name %> --file meta.json
+```
+
+and once hit the enter key and waited for a while, we should have something like
+that:
+
+```
+Current Directory
+├── _locales
+│   ├── en
+│   │   └── messages.json
+│   └── it
+│       └── messages.json
+├── _core.json
+├── _menu.json
+└── meta.json
+```
+
+If something goes wrong, when the command exits a list of warnings and errors is
+printed on the error console.

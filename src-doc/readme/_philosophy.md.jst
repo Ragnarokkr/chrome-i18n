@@ -1,0 +1,17 @@
+
+## Philosophy
+
+Internationalization files in Chrome/Chromium are JSON files composed by an 
+object with tenths or hundreds (sometimes thousands) keys which describe how
+a string has to be translated in a particular language.
+
+People usually code these gigantic files by hand, one for each language they want 
+to give support. Each language with its own directory and definition file. Same
+structure, same keys, same rules, but the translated message. 
+
+It's a lot of useless redundancy to manage by hand. This sucks and the goal is 
+to make it easier to manage.
+
+<%= name %> is a specific tool which will build a complete database for your
+Chrome extensions and web apps starting from some project files, easier to
+maintain and manage.
