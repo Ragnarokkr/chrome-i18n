@@ -10,9 +10,8 @@
     * [Example](#example)
 * [Philosophy](#philosophy)
 * [Contributing](#contributing)
-* [Release history](#release-history)
+* [Release History](#release-history)
 * [License](#license)
-
 
 ## Introduction
 
@@ -91,7 +90,7 @@ mode). To achieve this, we create a project file:
 
 and save giving name **dictionary.json**, then run our CLI tool:
 
-```bash
+```shell
 $ chrome-i18n
 ```
 
@@ -150,7 +149,7 @@ See the [CHANGELOG][] file distributed with the project.
 
 ## License
 
-Copyright (c) 2012-2013 Marco Trulla.<br>
+Copyright &copy; 2012-2013 Marco Trulla.<br>
 Released under the MIT license.
 
 See the [LICENSE][] file distributed with the project.

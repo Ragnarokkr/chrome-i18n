@@ -33,7 +33,7 @@ It requires only five fields to be defined:
 
 Field | Type | Description
 ---|:-:|---
-<% print( common_meta_fields.replace( '{{mode}}', 'language' ) ); %>
+<% print( partials['common_meta_fields'].replace( '{{mode}}', 'language' ) ); %>
 imports<small>*</small>|`String`|it **must** be set to a path. No globs into the path are allowed. This field indicates where to look for all the definition files to be used to retrieve the required informations.
 definitions|`Object`|this is pretty similiar to the one defined for the `database` field in [monolith](doc/monolith.md#database-descriptor) mode, with a big difference, there's not `locales` field defined in it.
 

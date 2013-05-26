@@ -1,13 +1,13 @@
-<%= header %>
-<% if (index) { print( index ); } %>
-<% if (intro) { print( intro ); } %>
-<% if (install) { print( install ); } %>
-<% if (usage) { print( usage ); } %>
-<% if (define) { print( define ); } %>
-<% if (example) { print( example ); } %>
-<% if (philosophy) { print( philosophy ); } %>
-<% if (contributing) { print( contributing ); } %>
-<% if (history) { print( history ); } %>
-<% if (license) { print( license ); } %>
+<%= partials['header'] %>
+<%= index %>
+<%= partials['intro'] %>
+<%= partials['install'] %>
+<%= partials['usage'] %>
+<%= partials['define'] %>
+<%= partials['example'] %>
+<%= partials['philosophy'] %>
+<%= partials['contributing'] %>
+<%= partials['history'] %>
+<%= partials['license'] %>
 
-<% if (links) { %><%= links %><% } %>
+<%= partials['links'] %>

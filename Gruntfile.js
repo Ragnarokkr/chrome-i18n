@@ -1,15 +1,17 @@
+// chrome-i18n-cli.js
+// https://github.com/Ragnarokkr/chrome-i18n
+//
+// Copyright (c) 2012-2013 Marco Trulla <marco@marcotrulla.it>
+// Licensed under the MIT license.
+
 'use strict';
 
 module.exports = function( grunt ) {
 
-	var path = require( 'path' ),
-		_ = grunt.util._;
-
 	// Project configuration.
 	grunt.initConfig({
-		// Package configuration
+		// Meta
 		pkg: grunt.file.readJSON( 'package.json' ),
-		// Meta configuration
 		meta: {
 			src: {
 				doc: './src-doc',
@@ -17,12 +19,12 @@ module.exports = function( grunt ) {
 			},
 			dest: {
 				doc: './doc',
-				mandoc: './man',
-				markdown: './md'
+				mandoc: './man'
 			},
 			test: './test'
 		},
-		// Tasks configuration
+
+		// Before deploying, bump the version number.
 		bump: {
 			options: {
 				part: 'patch',
@@ -30,20 +32,24 @@ module.exports = function( grunt ) {
 			},
 			files: [ 'package.json' ]
 		},
+
+		// Remove all test and temporaneous files.
 		clean: {
-			markdown: [
-				'<%= meta.dest.markdown %>',
+			doc: [
 				'<%= meta.dest.mandoc %>',
 				'<%= meta.dest.doc %>'
 			]
 		},
-		compdoc: {
+
+		// Compile all the docuemntation.
+		sildoc: {
 			options: {
-				compdocrc: '.compdoc',
-				index: true
+				meta: '<%= pkg %>',
+				index: 'gfm'
 			},
 			readme: {
 				options: {
+					data: grunt.file.readJSON( '.sildocrc' ),
 					template: '<%= meta.src.doc %>/readme/readme.md.jst'
 				},
 				src: '<%= meta.src.doc %>/readme/_*.md.jst',
@@ -81,13 +87,15 @@ module.exports = function( grunt ) {
 			},
 			mandoc: {
 				options: {
-					index: false,
+					index: 'none',
 					template: '<%= meta.src.mandoc %>/mandoc.roff.jst'
 				},
 				src: '<%= meta.src.mandoc %>/_*.roff.jst',
 				dest: '<%= meta.dest.mandoc %>/chrome-i18n.1'
 			}
 		},
+
+		// Check for the sources correctness.
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc'
@@ -105,25 +113,13 @@ module.exports = function( grunt ) {
 				src: ['test/**/*.js']
 			},
 		},
-		markdown: {
-			options: {
-				gfm: true,
-				highlight: 'manual'
-			},
-			info: {
-				template: '<%= meta.src.doc %>/md-gfm-test.html.jst',
-				dest: '<%= meta.dest.markdown %>/',
-				files: [ './*.md' ]
-			},
-			doc: {
-				template: '<%= meta.src.doc %>/md-gfm-test.html.jst',
-				dest: '<%= meta.dest.markdown %>/',
-				files: [ '<%= meta.dest.doc %>/*.md' ]
-			}
-		},
+
+		// Test the code for errors.
 		nodeunit: {
 			files: ['<%= meta.test %>/**/*_test.js'],
 		},
+
+		// Start to watch for changes in files
 		watch: {
 			gruntfile: {
 				files: '<%= jshint.gruntfile.src %>',
@@ -141,131 +137,30 @@ module.exports = function( grunt ) {
 				files: '<%= jshint.test.src %>',
 				tasks: ['jshint:test', 'nodeunit']
 			},
-			markdown: {
-				files: ['<%= markdown.info.files %>','<%= markdown.doc.files %>'],
-				tasks: ['markdown']
+			doc: {
+				files: [
+					'<%= sildoc.readme.src %>',
+					'<%= sildoc.monolith.src %>',
+					'<%= sildoc.language.src %>',
+					'<%= sildoc.category.src %>',
+					'<%= sildoc.mandoc.src %>'
+				],
+				tasks: ['sildoc']
 			}
 		},
 	});
 
 	// Grunt-Contrib Tasks
-	Object.keys( grunt.config('pkg').devDependencies ).forEach( function(dep){
-		if (/^grunt\-/i.test(dep)) {
+	Object.keys( grunt.config('pkg').devDependencies ).forEach( function( dep ){
+		if ( /^grunt\-/i.test( dep ) ) {
 			grunt.loadNpmTasks( dep );
 		} // if
 	});
 
 	// Default task.
 	grunt.registerTask('default', ['jshint', 'nodeunit']);
-	grunt.registerTask('doc', ['clean', 'compdoc', 'markdown']);
 
+	// Documentation generator task.
+	grunt.registerTask('doc', ['clean', 'sildoc']);
 
-	grunt.registerMultiTask('compdoc', 'Compile documents from partials', function() {
-		var options = this.options({
-				index: false
-			}),
-			heading = '^(#{2,}) (.+)$',
-			rePartial = /^_+([^.]+)(?:\..+)*$/i,
-			reHeadings = new RegExp( heading, 'igm' ),
-			reHeading = new RegExp( heading, 'i' ),
-			rcfile = null,
-			template = '',
-			processed = '',
-			data = {};
-
-		// Read the global configuration file (if was set).
-		if ( options.compdocrc ) {
-			rcfile = grunt.file.readJSON( options.compdocrc );
-		} // if
-
-		// Read the template (if was set).
-		if ( options.template ) {
-			if ( ! grunt.file.exists ) {
-				grunt.log.warn( 'Template file "' + options.template + '" not found.' );
-			} else {
-				template = grunt.file.read( options.template );
-			} // if..else
-		} // if
-
-		// Iterate over all src-dest file pairs.
-		this.files.forEach( function( f ) {
-			var partials = {}, headings, toc = '';
-
-			// Read and store all the partials
-			f.src.filter( function( filepath ) {
-				// Warn on and remove invalid source files.
-				if ( ! grunt.file.exists( filepath ) ) {
-					grunt.log.warn('Source file "' + filepath + '" not found.');
-					return false;
-				} // if
-
-				if ( ! rePartial.test( path.basename( filepath ) ) ) {
-					grunt.log.warn('Source file "' + filepath + '" is not a partial.');
-					return false;
-				} // if
-
-				return true;
-			}).forEach( function( filepath ) {
-				// Store all the partials
-				var	src = grunt.file.read( filepath ),
-					key = path.basename( filepath ).match( rePartial )[1];
-
-				partials[ key ] = grunt.util.normalizelf( src );
-			});
-
-			// Process the template / concatenate and process partials
-			_(data).extend( grunt.config( 'pkg' ), options, rcfile );
-
-			if ( template ) {
-				// Include partials for indexing and processing
-				_(data).extend( partials );
-
-				if ( options.index ) {
-					// Temporarly hide index tag from processing
-					template = template.replace( '<%= index %>', '{{ index }}' );
-					// Intermediate processing
-					processed = grunt.template.process( template, { data: data } );
-					// Build TOC
-					headings = processed.match( reHeadings );
-					headings.forEach( function( heading ) {
-						var chapter = heading.match( reHeading );
-						toc += grunt.util.repeat( ( chapter[1].length - 2 ) * 4, ' ' ) +
-							'* [' + _(chapter[2]).humanize() + '](' +
-							'#' + _(chapter[2]).slugify() + ')\n';
-					});
-					data.index = toc;
-					// Re-enable index tag
-					template = template.replace( '{{ index }}', '<%= index %>' );
-				} // if
-
-				processed = grunt.template.process( template, { data: data } );
-			} else {
-				// Concatenate and process all partials
-				template = _(partials).map( function( partial ) {
-					return partial;
-				}).join( grunt.util.linefeed );
-				processed = grunt.template.process( template, { data: data } );
-
-				if ( options.index ) {
-					// Build TOC
-					headings = processed.match( reHeadings );
-					headings.forEach( function( heading ) {
-						var chapter = heading.match( reHeading );
-						toc += grunt.util.repeat( ( chapter[1].length - 2 ) * 4, ' ' ) +
-							'* [' + _(chapter[2]).humanize() + '](' +
-							'#' + _(chapter[2]).slugify() + ')\n';
-					});
-
-					processed = toc + processed;
-				} // if
-			} // if..else
-
-			// Write the destination file.
-			grunt.file.write( f.dest, processed );
-
-			// Print a success message.
-			grunt.log.writeln( 'File "' + f.dest + '" created.' );
-		});
-
-	});
 };

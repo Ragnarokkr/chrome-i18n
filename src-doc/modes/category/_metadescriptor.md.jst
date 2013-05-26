@@ -19,7 +19,7 @@ without the `meta` key. It requires only four fields to be defined:
 
 Field | Type | Description
 ---|:-:|---
-<% print( common_meta_fields.replace( '{{mode}}', 'category' ) ); %>
+<% print( partials['common_meta_fields'].replace( '{{mode}}', 'category' ) ); %>
 imports<small>*</small>|`String` or `Array`|it **must** be set to at least one file or path. Globs are allowed. This field indicates where to find all the database files from which retrieve the informations.
 
 (*) This field is validated and expanded according to some assumptions:

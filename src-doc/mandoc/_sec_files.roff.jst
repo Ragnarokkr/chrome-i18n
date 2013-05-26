@@ -1,5 +1,5 @@
 .SH FILES
-<%= grunt.util._(name).capitalize() %> supports three kind of project formats:
+<%= grunt.util._(meta['name']).capitalize() %> supports three kind of project formats:
 .B monolith,
 .B language,
 and
@@ -19,5 +19,5 @@ configures the project, and a set of data files which describes the various
 translations, grouped by language or category.
 
 Please, refer to
-.B <%= homepage %>/tree/master/doc
+.B <%= meta['homepage'] %>/tree/master/doc
 for further informations.

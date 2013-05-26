@@ -5,7 +5,7 @@ In monolith mode, the `meta` descriptor requires only three fields:
 
 Field | Type | Description
 ---|:-:|---
-<% print( common_meta_fields.replace( '{{mode}}', 'monolith' ) ); %>
+<% print( partials['common_meta_fields'].replace( '{{mode}}', 'monolith' ) ); %>
 
 In this mode, no other fields are required. However, no restrictions are made 
 to the amount of informations you can add to this descriptor. Important is that
