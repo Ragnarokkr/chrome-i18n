@@ -111,12 +111,12 @@ module.exports = function( grunt ) {
 			},
 			test: {
 				src: ['test/**/*.js']
-			},
+			}
 		},
 
 		// Test the code for errors.
 		nodeunit: {
-			files: ['<%= meta.test %>/**/*_test.js'],
+			files: ['<%= meta.test %>/**/*_test.js']
 		},
 
 		// Start to watch for changes in files
@@ -147,20 +147,22 @@ module.exports = function( grunt ) {
 				],
 				tasks: ['sildoc']
 			}
-		},
+		}
 	});
 
 	// Grunt-Contrib Tasks
-	Object.keys( grunt.config('pkg').devDependencies ).forEach( function( dep ){
-		if ( /^grunt\-/i.test( dep ) ) {
-			grunt.loadNpmTasks( dep );
-		} // if
-	});
+	require( 'matchdep' ).filterDev( 'grunt-*' ).forEach( grunt.loadNpmTasks );
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'nodeunit']);
+	grunt.registerTask('default', [
+		'jshint',
+		'nodeunit'
+	]);
 
 	// Documentation generator task.
-	grunt.registerTask('doc', ['clean', 'sildoc']);
+	grunt.registerTask('doc', [
+		'clean',
+		'sildoc'
+	]);
 
 };
