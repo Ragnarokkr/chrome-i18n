@@ -18,8 +18,9 @@ function rebuildDatabase( meta, errBuf ){
 			Object.keys( file ).forEach( function( termKey ){
 				var term = file[ termKey ];
 				meta.locales.forEach( function( lang ){
-					if ( !term.locales.hasOwnProperty( lang ) ) {
-						term.locales[ lang ] = '!-- PLACEHOLDER ADDED BY CHROME-I18N --!';
+					var locales = term.locales || term;
+					if ( !locales.hasOwnProperty( lang ) ) {
+						locales[ lang ] = '!-- PLACEHOLDER ADDED BY CHROME-I18N --!';
 						errBuf.push( 'Warning (locales): "' + lang +
 							'" version for "' + termKey +
 							'" is not defined' );
@@ -35,8 +36,8 @@ function rebuildDatabase( meta, errBuf ){
 	return db;
 } // rebuildDatabase()
 
-function parse( source, errBuf ) {
-	commons.resolveRelatives( source );
+function parse( source, errBuf, entryLocation ) {
+	commons.resolveRelatives( source, entryLocation );
 	return {
 		meta: source,
 		database: rebuildDatabase( source, errBuf )

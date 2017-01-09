@@ -41,8 +41,8 @@ function rebuildDatabase( meta, errBuf ){
 	return db;
 } // rebuildDatabase()
 
-function parse( source, errBuf ) {
-	commons.resolveRelatives( source );
+function parse( source, errBuf, entryLocation ) {
+	commons.resolveRelatives( source, entryLocation );
 	return {
 		meta: source,
 		database: rebuildDatabase( source, errBuf )
