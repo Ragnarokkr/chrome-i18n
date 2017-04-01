@@ -17,15 +17,33 @@ function rebuildDatabase( meta, errBuf ){
 			var file = JSON.parse( fs.readFileSync( partial, 'utf8' ) );
 			Object.keys( file ).forEach( function( termKey ){
 				var term = file[ termKey ];
+				var locales = term.locales || term;
+				var appendedLocales = {};
 				meta.locales.forEach( function( lang ){
-					var locales = term.locales || term;
 					if ( !locales.hasOwnProperty( lang ) ) {
-						locales[ lang ] = '!-- PLACEHOLDER ADDED BY CHROME-I18N --!';
-						errBuf.push( 'Warning (locales): "' + lang +
-							'" version for "' + termKey +
-							'" is not defined' );
+						var placeholderString = '!-- PLACEHOLDER ADDED BY CHROME-I18N --!';
+						var fallback_lang = meta.fallback_locale;
+						if ( !!fallback_lang && lang !== fallback_lang ) {
+							if ( locales.hasOwnProperty( fallback_lang ) ) {
+								appendedLocales[ lang ] = locales[ fallback_lang ];
+							} else {
+								appendedLocales[ lang ] = placeholderString;
+								errBuf.push( 'Warning (locales): "' + lang +
+									'" and fallback lang "' + fallback_lang +
+									'" version for "' + termKey +
+									'" is not defined' );
+							}
+						} else {
+							appendedLocales[ lang ] = placeholderString;
+							errBuf.push( 'Warning (locales): "' + lang +
+								'" version for "' + termKey +
+								'" is not defined' );
+						}
 					} // if
 				});
+				for (var appendedLang in appendedLocales) {
+					locales[ appendedLang ] = appendedLocales[ appendedLang ];
+				}
 				db[ termKey ] = term;
 			});
 		} catch( e ) {
