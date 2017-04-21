@@ -30,16 +30,34 @@ var // Load required modules
 
 ////////////////////////////////////////////////////////////////////////
 
-// --file: the dictionary or meta JSON file. It must be a valid JSON
-//         file (not a JS object). Since only JSON is supported, the
-//         file suffix may be omitted.
+// --entry: the dictionary or meta JSON file. It must be a valid JSON
+//			file (not a JS object). Since only JSON is supported, the
+//			file suffix may be omitted.
 
 argv.addArgument(
-	[ '-f', '--file' ],
+	[ '-e', '--entry' ],
 	{
 		defaultValue: './dictionary.json',
 		type: 'string',
 		help: 'Dictionary or meta file. It MUST be in valid JSON format. Suffix may be omitted.'
+	}
+);
+
+argv.addArgument(
+	[ '-d', '--dest' ],
+	{
+		type: 'string',
+		help: 'The target directory for the _locales directory. ' +
+			'The path must end with a trailing path separator or the field will be invalid. ' +
+			'Takes precedence over dest defined in dictionary or meta file.'
+	}
+);
+
+argv.addArgument(
+	[ '-f', '--force' ],
+	{
+		action: 'storeTrue',
+		help: 'Forces writing dictionary even if locales already exist in destination path.'
 	}
 );
 
@@ -58,7 +76,7 @@ function parseSource( errBuf ) {
 			}
 		},
 		args = argv.parseArgs(),
-		file = path.resolve( path.extname( args.file ) ? args.file : args.file + '.json' ),
+		file = path.resolve( path.extname( args.entry ) ? args.entry : args.entry + '.json' ),
 		source;
 
 	if ( fs.existsSync( file ) ) {
@@ -69,8 +87,13 @@ function parseSource( errBuf ) {
 			return false;
 		} // try..catch
 
+		// arguments dest takes precedence
+		if (args.dest) {
+			(source.meta || source).dest = args.dest;
+		}
+
 		if ( commons.validateMeta( source.meta || source, errBuf ) ) {
-			return parsers[ (source.meta || source).format ]().parse( source, errBuf );
+			return parsers[ (source.meta || source).format ]().parse( source, errBuf, path.dirname(file) );
 		} // if
 	} else {
 		errBuf.push( 'Error (source): unable to open "' + file + '"' );
@@ -82,6 +105,7 @@ function parseSource( errBuf ) {
 
 function writeDictionary( dictionary, errBuf ) {
 	var writeSuccess = true,
+		args = argv.parseArgs(),
 		dict = new Dictionary();
 
 	dict.dictionary = dictionary;
@@ -91,7 +115,7 @@ function writeDictionary( dictionary, errBuf ) {
 		var locale = dict.getLocale( localeID ),
 			localePath = path.join( dictionary.meta.dest, localeID );
 
-		if ( !fs.existsSync( localePath ) ) {
+		if ( !fs.existsSync( localePath ) || args.force ) {
 			mkdirp.sync( localePath );
 			fs.writeFileSync(
 				path.join( localePath, 'messages.json' ),

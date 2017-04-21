@@ -8,8 +8,8 @@
 
 var commons = require( '../lib/commons' );
 
-function parse( source ) {
-	commons.resolveRelatives( source.meta );
+function parse( source, errBuf, entryLocation ) {
+	commons.resolveRelatives( source.meta, entryLocation );
 	return source;
 } // parse()
 
